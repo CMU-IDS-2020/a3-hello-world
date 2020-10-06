@@ -1,6 +1,7 @@
 # CMU Interactive Data Science Assigment 3
 
-* **Team members**: XXXX and XXXX
+* **Team members**: Liyun Tu and Xiaou Sun
+* **Dataset source** https://www.kaggle.com/unsdsn/world-happiness
 * **Online URL**: https://s4a.streamlit.io/cmu-ids-2020/a3-template/master/streamlit_app.py/+/
 
 ## Instructions
