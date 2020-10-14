@@ -1,6 +1,13 @@
-# Project name
+# World Happiness Report
 
-![A screenshot of your application. Could be a GIF.](screenshot.png)
+**Team members**: 
+
+- Name: Liyun Tu (Andrew ID: **Need to be filled in!**)
+- Xiaou Sun (Andrew ID: seansun)
+
+**Data source**: https://www.kaggle.com/unsdsn/world-happiness
+
+
 
 TODO: Short abstract describing the main goals and how you achieved them.
 
@@ -12,6 +19,27 @@ TODO: **A clear description of the goals of your project.** Describe the questio
 
 TODO: **A rationale for your design decisions.** How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
 
+
+
 ## Development
 
 TODO: **An overview of your development process.** Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+
+
+
+**Draft**:
+
+Dataset selection: Kaggle, Assignemnt 2 datasets (n hours)
+
+Data cleaning: (n hours)
+
+Brainsotrming about visualization types:
+
+- Scatter plot for basic attribute correlation
+- Spatial visualizaiton: Map
+- Changes over time
+- ML insights:
+  - Predicitons for 2019 V.S. True data in 2019
+  - Residual analysis (why some predictions are bad, can be possibly shown by using interactive plot?)
+  - \* How the model learns the data? i.e. show the training process?
+
