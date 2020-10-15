@@ -7,9 +7,9 @@ import json
 
 
 
-@st.cache  # add caching so we load the data only once
-def load_data(year, path="../data"):
-    return pd.read_csv(os.path.join(path, year) + "_map.csv")
+# @st.cache  # add caching so we load the data only once
+# def load_data(year, path="../data"):
+#     return pd.read_csv(os.path.join(path, year) + "_map.csv")
 
 st.title("What makes you happy? 📊😄")
 
@@ -17,7 +17,7 @@ st.title("What makes you happy? 📊😄")
 def load_data():
     # Load the happiness data
     happy_url = "https://raw.githubusercontent.com/CMU-IDS-2020/a3-hello-world/liyun/data/2016_map.csv"
-    df = pd.read_csv(happy_url, index_col=0)
+    df = pd.read_csv(happy_url)
     df['Year'] = df['Year'].astype(str)
     return df
 
@@ -30,13 +30,7 @@ if st.checkbox("Show raw data"):
 
 st.write("Hmm 🤔, is there some correlation between country economics and happiness score? Let's make a scatterplot with [Altair](https://altair-viz.github.io/) to find.")
 
-
-# picked = alt.selection_single()
-# picked = alt.selection_single(on = "mouseover", empty = "none")
 picked = alt.selection_multi()
-# picked = alt.selection_interval(encodings=["x"])
-# picked = alt.selection_single(encodings=["color"])
-# picked = alt.selection_single(fields = ["Species", "Island"])
 chart = alt.Chart(df).mark_circle(size = 100).encode(
     x=alt.X("GDP", scale=alt.Scale(zero=False)),
     y=alt.Y("Score", scale=alt.Scale(zero=False)),
@@ -46,14 +40,48 @@ chart = alt.Chart(df).mark_circle(size = 100).encode(
 )
 
 st.write(chart.add_selection(picked))
-# year = st.slider("Select Year", 2015, 2015, 2020, 1)
 
-# World score map
-##Select which feature the map color represent
+
+# Feature distriburtion
+st.write("## Explore feature distribution")
+
+##Select feature to explore
 feature = st.selectbox(
-    'Looking into the distribution of feature', 
+    'Select the feature', 
     ('Score','GDP','Family','Health','Freedom','Generosity','Corruption'))
-feature = feature+":Q"
+
+##Histogram for score & selected feature
+brush = alt.selection_interval(encodings = ["x"], resolve = "intersect")
+
+hist = (
+    alt.Chart()
+    .mark_bar()
+    .encode(
+        alt.X(
+            alt.repeat("row"),
+            type = "quantitative",
+            bin = alt.Bin(maxbins=100,minstep =0.05),
+        ),
+        alt.Y("count():Q", title = None),
+    )
+)
+
+if feature == "Score":
+    hisfeature = ['Score']
+else:
+    hisfeature = ['Score',feature]
+
+multihist = alt.layer(
+    hist.add_selection(brush).encode(color = alt.value("lightgrey")),
+    hist.transform_filter(brush),
+).properties(width = 650, height = 100).repeat(
+    row = hisfeature, data = df
+).configure_view(
+    stroke = "transparent"
+) 
+st.write(multihist)
+
+
 
 ##Draw a black-white world map
 countries = alt.topo_feature(data.world_110m.url, 'countries')
@@ -73,14 +101,23 @@ base = alt.Chart(countries).mark_geoshape(
     lookup='id',
     from_=alt.LookupData(df, 'CodeNum', ['Score','Country or Region','GDP','Family','Health','Freedom','Generosity','Corruption','Year'])
 ).properties(
-    width=750,
+    width=730,
     height=450
 ).project('equirectangular')
 
-# st.write(base.encode(
-#     color = alt.Color(feature, scale=alt.Scale(scheme="oranges"))
-# ))
-st.write(base)
+picked = alt.selection_single(encodings=["color"])
+st.write(base.encode(
+    color = alt.condition(picked, alt.Color(feature+":Q", scale=alt.Scale(scheme="oranges")), alt.value("lightgray"))
+).add_selection(picked))
+
+
+
+
+
+
+
+
+
 
 
 
