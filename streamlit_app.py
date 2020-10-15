@@ -5,12 +5,18 @@ from vega_datasets import data
 import plotly.offline as py
 import json
 
+
+
+@st.cache  # add caching so we load the data only once
+def load_data(year, path="../data"):
+    return pd.read_csv(os.path.join(path, year) + "_map.csv")
+
 st.title("What makes you happy? 📊😄")
 
 @st.cache  # add caching so we load the data only once
 def load_data():
     # Load the happiness data
-    happy_url = "https://raw.githubusercontent.com/CMU-IDS-2020/a3-hello-world/master/data/happy_map_filled.csv"
+    happy_url = "https://raw.githubusercontent.com/CMU-IDS-2020/a3-hello-world/liyun/data/happy_map_code.csv"
     df = pd.read_csv(happy_url, index_col=0)
     df['Year'] = df['Year'].astype(str)
     return df
@@ -40,56 +46,37 @@ chart = alt.Chart(df).mark_circle(size = 100).encode(
 )
 
 st.write(chart.add_selection(picked))
-year = st.slider("Select Year", 2015, 2015, 2020, 1)
-
-
-def gen_map(geodata, color_column, title, tooltip, color_scheme='bluegreen'):
-    '''
-    Generates Toronto neighbourhoods map with building count choropleth
-    '''
-    
-    # Add Base Layer
-    base = alt.Chart(geodata, title = title).mark_geoshape(
-        fill='#666666',
-        stroke='white'
-    ).encode(
-    ).properties(
-        width=800,
-        height=800
-    )
-    # Add Choropleth Layer
-    choro = alt.Chart(geodata).mark_geoshape(
-        fill='lightgray',
-        stroke='black'
-    ).encode(
-        alt.Color(color_column, 
-                  type='quantitative', 
-                  scale=alt.Scale(scheme=color_scheme),
-                  title = "Building Counts"),
-         tooltip=tooltip
-    )
-    return base + choro
+# year = st.slider("Select Year", 2015, 2015, 2020, 1)
 
 # World score map
-source = alt.topo_feature(data.world_110m.url, 'countries')
+countries = alt.topo_feature(data.world_110m.url, 'countries')
+
+alt.Chart(countries).mark_geoshape(
+    fill='#666666',
+    stroke='white'
+).properties(
+    width=750,
+    height=450
+).project('equirectangular')
+
+base = alt.Chart(countries).mark_geoshape(
+).encode(tooltip=['Country or Region:N','Score:Q','GDP:Q','Family:Q','Health:Q','Freedom:Q','Generosity:Q','Corruption:Q'],
+         color=alt.Color('Score:Q', scale=alt.Scale(scheme="oranges"))
+).transform_lookup( # your code here
+    lookup='id',
+    from_=alt.LookupData(df, 'CodeNum', ['Score','Country or Region','GDP','Family','Health','Freedom','Generosity','Corruption','Year'])
+).properties(
+    width=750,
+    height=450
+).project('equirectangular')
+
+st.write(base)
+
+input_dropdown = alt.binding_select(options = [2015, 2016, 2017,2018,2019], 
+name = "'Which year would you like to have a look?' ")
+picked = alt.selection_single(encodings = ["color"], bind = input_dropdown)
 
 
-# base = alt.Chart(source).mark_geoshape(
-#     fill='#666666',
-#     stroke='white'
-# ).properties(
-#     width=600, 
-#     height=400
-# )
-# charts = base.project("equirectangular").properties(
-#     title="equirectangular"
-# )
-# st.write(charts)
-# st.map(df)
-
-choro_json = json.loads(df.to_json())
-choro_data = alt.Data(values = choro_json['features'])
-happy_map = gen_map(geodata=choro_data, color_column='properties.Score', title="World happiness map", tooltip=['properties.Country:O','properties.Score:Q'], color_scheme='yelloworangered')
 
 
 
