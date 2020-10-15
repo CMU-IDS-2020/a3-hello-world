@@ -16,7 +16,7 @@ st.title("What makes you happy? 📊😄")
 @st.cache  # add caching so we load the data only once
 def load_data():
     # Load the happiness data
-    happy_url = "https://raw.githubusercontent.com/CMU-IDS-2020/a3-hello-world/liyun/data/happy_map_code.csv"
+    happy_url = "https://raw.githubusercontent.com/CMU-IDS-2020/a3-hello-world/liyun/data/2016_map.csv"
     df = pd.read_csv(happy_url, index_col=0)
     df['Year'] = df['Year'].astype(str)
     return df
@@ -49,8 +49,14 @@ st.write(chart.add_selection(picked))
 # year = st.slider("Select Year", 2015, 2015, 2020, 1)
 
 # World score map
-countries = alt.topo_feature(data.world_110m.url, 'countries')
+##Select which feature the map color represent
+feature = st.selectbox(
+    'Looking into the distribution of feature', 
+    ('Score','GDP','Family','Health','Freedom','Generosity','Corruption'))
+feature = feature+":Q"
 
+##Draw a black-white world map
+countries = alt.topo_feature(data.world_110m.url, 'countries')
 alt.Chart(countries).mark_geoshape(
     fill='#666666',
     stroke='white'
@@ -59,6 +65,7 @@ alt.Chart(countries).mark_geoshape(
     height=450
 ).project('equirectangular')
 
+##Combine with data set and use color for selected feature
 base = alt.Chart(countries).mark_geoshape(
 ).encode(tooltip=['Country or Region:N','Score:Q','GDP:Q','Family:Q','Health:Q','Freedom:Q','Generosity:Q','Corruption:Q'],
          color=alt.Color('Score:Q', scale=alt.Scale(scheme="oranges"))
@@ -70,11 +77,12 @@ base = alt.Chart(countries).mark_geoshape(
     height=450
 ).project('equirectangular')
 
+# st.write(base.encode(
+#     color = alt.Color(feature, scale=alt.Scale(scheme="oranges"))
+# ))
 st.write(base)
 
-input_dropdown = alt.binding_select(options = [2015, 2016, 2017,2018,2019], 
-name = "'Which year would you like to have a look?' ")
-picked = alt.selection_single(encodings = ["color"], bind = input_dropdown)
+
 
 
 
