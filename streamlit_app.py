@@ -30,7 +30,6 @@ if features:
         x=alt.X('Score:Q', scale = alt.Scale(zero=False)),
     ).properties(
         width=700
-        # height = 100
     ).add_selection(
         brush
     )
@@ -49,7 +48,7 @@ if features:
         x= alt.X('Score:Q', sort="descending", scale=alt.Scale(zero=False)),
         y='Value',
         color=alt.condition(legend_selection, 'Feature:N', alt.value('lightgray')),
-        tooltip=['Country or Region:N','Score:Q'],
+        tooltip=['Country or Region:N','Score:Q',"Feature:N", "Value:Q"],
     ).properties(
         width=700,
         height = 400
