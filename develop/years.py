@@ -12,8 +12,8 @@ def load_data(year, path="../data"):
 def show_correlation(features, df):
     default_features = ['Rank', 'Score', 'GDP', 'Family', 'Health', 'Freedom', 'Generosity']
     chart = alt.Chart(df).mark_point().encode(
-        x=alt.X(features[0], scale=alt.Scale(zero=False)),
-        y=alt.Y(features[1], scale=alt.Scale(zero=False)),
+        x=alt.X(features[0], scale=alt.Scale(zero=True)),
+        y=alt.Y(features[1], scale=alt.Scale(zero=True)),
         # show country name or region name and other attributes as tooltip
         tooltip=['Country or Region'] + [f for f in default_features if f not in features]
     ).properties(

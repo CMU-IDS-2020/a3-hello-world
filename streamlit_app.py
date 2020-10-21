@@ -1,29 +1,40 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import os
 
-st.title("Let's analyze some Penguin Data 🐧📊.")
+st.title("Happiness Data Analysis For Each Year")
 
 @st.cache  # add caching so we load the data only once
-def load_data():
-    # Load the penguin data from https://github.com/allisonhorst/palmerpenguins.
-    penguins_url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/v0.1.0/inst/extdata/penguins.csv"
-    return pd.read_csv(penguins_url)
+def load_data(year, path="../data"):
+    return pd.read_csv(os.path.join(path, year) + "_map.csv")
 
-df = load_data()
+def show_correlation(features, df):
+    default_features = ['Rank', 'Score', 'GDP', 'Family', 'Health', 'Freedom', 'Generosity']
+    chart = alt.Chart(df).mark_point().encode(
+        x=alt.X(features[0], scale=alt.Scale(zero=True)),
+        y=alt.Y(features[1], scale=alt.Scale(zero=True)),
+        # show country name or region name and other attributes as tooltip
+        tooltip=['Country or Region'] + [f for f in default_features if f not in features]
+    ).properties(
+        width=700, height=400
+    ).interactive()
+    st.write(chart)
 
-st.write("Let's look at raw data in the Pandas Data Frame.")
+year = st.selectbox(
+    'Which year would you like to have a look?', 
+    ('2015', '2016', '2017', '2018', '2019'))
 
-st.write(df)
-
-st.write("Hmm 🤔, is there some correlation between body mass and flipper length? Let's make a scatterplot with [Altair](https://altair-viz.github.io/) to find.")
-
-chart = alt.Chart(df).mark_point().encode(
-    x=alt.X("body_mass_g", scale=alt.Scale(zero=False)),
-    y=alt.Y("flipper_length_mm", scale=alt.Scale(zero=False)),
-    color=alt.Y("species")
-).properties(
-    width=600, height=400
-).interactive()
-
-st.write(chart)
+if year:
+    df = load_data(year)
+    st.write("Let's look at happeniss data in the Pandas Data Frame for year " + year + ".")
+    st.write(df)
+    # TODO: show some basic information before going to attributes correlation?
+    st.write("Interested in seeing attributes' correlations?")
+    features = st.multiselect(
+        "Select two attributes to see correlation",
+        ('Rank', 'Score', 'GDP', 'Family', 'Health', 'Freedom', 'Generosity'))
+    if (len(features) != 0) and (len(features) != 2):
+        st.write("Please select two attributes.")
+    elif len(features) == 2:
+        show_correlation(features, df)
