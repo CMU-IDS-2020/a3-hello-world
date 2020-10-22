@@ -37,7 +37,7 @@ Before plotting, we use a multi-selection box to enable users to select one or m
 
 **Plots**
 
-On the top we have a strip plot for happiness score. This plot could represent the distribution of happiness scores. More importantly, users could take it as a interval selector for selecting other two plots. 
+First we have a strip plot for happiness score. This plot could represent the distribution of happiness scores. More importantly, users could take it as a interval selector for selecting other two plots. 
 
 
 Second plot is a multi-line chart. The x-axis refers to the country/region names sorted in descending order of happiness rank while the y-axis includes scores of user selected features. This plot shows the trend of each feature scores between countries. Also, users could investigate how country happiness rank changes over years by sliding the year selection bar.
@@ -45,7 +45,7 @@ Second plot is a multi-line chart. The x-axis refers to the country/region names
 
 For the last plot, we use a scatter plot with regression line to show relationhip between feature scores and happiness scores. Users could flexibly select regression type to investigate optimal relationship. Besides, hovering a data point will execute its tooltip showing country name, happiness score, feature type and feature score. 
 
-The plots are closely binded. By choosing the interactive legend on the top right, multi-line chart and scatter plot will highlight the selected features. Besides, selecting the strip plot will simultaneously filter data in other plots and change their axis domain. We hope the flexible interactivity of these plots could insipre users' insights into relationship between the six features and happiness. 
+The plots are closely binded. By choosing the interactive legend on the right, multi-line chart and scatter plot will highlight the selected features. Besides, selecting the strip plot will simultaneously filter data in other plots and change their axis domain. We hope the flexible interactivity of these plots could insipre users' insights into relationship between the six features and happiness. 
 
 
 <img src="prototype_final.JPG" alt="The final draft prototype" width="600"/>
