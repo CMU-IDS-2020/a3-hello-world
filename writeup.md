@@ -2,11 +2,12 @@
 
 **Team members**: 
 
-- Name: Liyun Tu (Andrew ID: **Need to be filled in!**)
+- Liyun Tu (Andrew ID: liyunt)
 - Xiaou Sun (Andrew ID: seansun)
 
 **Data source**: https://www.kaggle.com/unsdsn/world-happiness
 
+![A screenshot of your application. Could be a GIF.](screenshot.png)
 
 
 TODO: Short abstract describing the main goals and how you achieved them.
@@ -14,6 +15,7 @@ TODO: Short abstract describing the main goals and how you achieved them.
 ## Project Goals
 
 TODO: **A clear description of the goals of your project.** Describe the question that you are enabling a user to answer. The question should be compelling and the solution should be focused on helping users achieve their goals. 
+
 
 ## Design
 
