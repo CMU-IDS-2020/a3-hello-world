@@ -7,7 +7,9 @@
 
 **Data source**: https://www.kaggle.com/unsdsn/world-happiness
 
-![A screenshot of your application. Could be a GIF.](demo.gif)
+<!-- ![A screenshot of your application. Could be a GIF.](demo.gif) -->
+
+<img src="demo.gif" alt="A screenshot of the application" width="500"/>
 
 
 
@@ -25,8 +27,9 @@ The main goal of this app is to explore how factors contribute to happy score. B
 
 For our first draft of prototype design as below, we followed the trend of homework 2 which designed a series of plots including: scatter plot for basic attribute distribution, spatial visualizaiton for country scores, interactive plot for attribute change over time, and scatter plot with regression line indicating ML prediction. 
 
-![The initial draft prototype](prototype_old.JPG =500x)
+
 <img src="prototype_old.JPG" alt="The initial draft prototype" width="500"/>
+
 
 Later we realized the app should efficiently convey information and inspire exploration which indicate it should be tightly-focused. We decided to give up the initial design and turned to design two or three informative and interactive plots.  
 **General Selection**
@@ -35,7 +38,7 @@ Before plotting, we used a multi-selection box to enable users to select one or 
 **Plots**
 The three plots  
 
-![The final prototype](prototype_final.JPG =500x)
+
 <img src="prototype_final.JPG" alt="The final draft prototype" width="500"/>
 
 
