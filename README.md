@@ -1,6 +1,6 @@
 # CMU Interactive Data Science Assigment 3
 
-* **Team members**: Liyun Tu (Andrew ID: liyunt) and Xiaou Sun (Andrew ID: seansun)
+* **Team members**: Liyun Tu (Andrew ID: liyunt) and Xiaoyu Sun (Andrew ID: seansun)
 * **Dataset source** https://www.kaggle.com/unsdsn/world-happiness
 * **Online URL**: https://share.streamlit.io/cmu-ids-2020/a3-hello-world
 

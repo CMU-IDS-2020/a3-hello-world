@@ -37,11 +37,11 @@ We use a multi-selection box to enable users to select one or more features amon
 
 First we have a strip plot for happiness score sorted in **descending order**. This plot could represent the distribution of happiness scores. More importantly, users could take it as a filter/minimap for selecting corresponding points in other two plots.
 
-Second plot is a multi-line chart. The x-axis refers to the country/region names sorted in **descending** order of happiness rank while the y-axis includes scores of user selected features. Since those points are soretd in descending order of happiness score, this plot shows the rough relationship between happiness score and different features as well as the related country information. Also, users could investigate how country happiness rank changes over years by sliding the year selection bar.
+Second plot is a multi-line chart. The x-axis refers to the country/region names sorted in **descending** order of happiness rank while the y-axis includes scores of user selected features. Since those points are sortd in descending order of happiness score, this plot shows the rough relationship between happiness score and different features as well as the related country information. Also, users could investigate how country happiness rank changes over years by sliding the year selection bar.
 
 As the multi-line plot showing the rough relationship, we use another scatter plot with regression line to more directly show relationhip between feature scores and happiness scores. Users could flexibly select regression type to investigate optimal relationship. Besides, hovering a data point will trigger its tooltip showing country name, happiness score, feature type and feature score.
 
-In additon, out plots are closely binded with interactions. Lines and circles are colored. By choosing the interactive legend on the right, multi-line chart and scatter plot will highlight the selected features, which eables user to focus on a specific feature at a time. Besides, selecting the strip plot will simultaneously filter data in other plots and change their axis domain. We hope the flexible interactivity of these plots could insipre users' insights into relationship between the six features and happiness.
+In additon, our plots are closely binded with interactions. Lines and circles are colored. By choosing the interactive legend on the right, multi-line chart and scatter plot will highlight the selected features, which enables user to focus on a specific feature at a time. Besides, selecting the strip plot will simultaneously filter data in other plots and change their axis domain. We hope the flexible interactivity of these plots could insipre users' insights into relationship between the six features and happiness.
 
 
 
@@ -51,8 +51,8 @@ In additon, out plots are closely binded with interactions. Lines and circles ar
 
 **Initial Design** As is mentioned before, our first protype followed the trend of homework 2. Xiaoyu worked on the interactive plot for feature correlations while Liyun implemented the spatial heatmap for happiness score distribution. (6 hours/person)
 
-**Second Round Brain Storming** As mentioned in the introduction before, we rethough about our app and did a second round brain storming to make our app more tightly-focused on showing the relationship rather than covering many different aspects. (4 hours/person)
+**Second Round Brain Storming** As mentioned in the introduction before, we rethought about our app and did a second round brain storming to make our app more tightly-focused on showing the relationship rather than covering many different aspects. (4 hours/person)
 
 **Final Design** Having learnt about the issue of initial design, we basically reimplemented everything based on our new design. For efficient coding, we worked in turn as a driver and navigator/researcher which is a popular team programming technique. (10 hours/person)
 
-Overall, we roughly spent 26 per person on developing the app. The most time-consuming aspect should be figuring out efficient plots for dataset exploration.
+Overall, we roughly spent 23 per person on developing the app. The most time-consuming aspect should be figuring out efficient plots for dataset exploration.
