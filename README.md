@@ -2,7 +2,7 @@
 
 * **Team members**: Liyun Tu (Andrew ID: liyunt) and Xiaou Sun (Andrew ID: seansun)
 * **Dataset source** https://www.kaggle.com/unsdsn/world-happiness
-* **Online URL**: https://s4a.streamlit.io/cmu-ids-2020/a3-template/master/streamlit_app.py/+/
+* **Online URL**: https://share.streamlit.io/cmu-ids-2020/a3-hello-world
 
 ## Instructions
 
